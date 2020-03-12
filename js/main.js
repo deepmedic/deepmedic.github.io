@@ -1,207 +1,209 @@
-(function ($) {
-  "use strict";
+/** 
+ * ===================================================================
+ * Main js
+ *
+ * ------------------------------------------------------------------- 
+ */ 
 
-  // Preloader
-  $(window).on('load', function () {
-    if ($('#preloader').length) {
-      $('#preloader').delay(100).fadeOut('slow', function () {
-        $(this).remove();
+(function($) {
+
+	"use strict";
+
+	/* --------------------------------------------------- */
+	/* Preloader
+	------------------------------------------------------ */ 
+   $(window).load(function() {
+      // will first fade out the loading animation 
+    	$("#loader").fadeOut("slow", function(){
+
+        // will fade out the whole DIV that covers the website.
+        $("#preloader").delay(300).fadeOut("slow");
+
+      }); 
+  	})
+
+
+  	/*---------------------------------------------------- */
+	/* FitVids
+	------------------------------------------------------ */ 
+  	$(".fluid-video-wrapper").fitVids();
+
+
+	/* --------------------------------------------------- */
+	/*  Vegas Slideshow
+	------------------------------------------------------ */
+	$(".home-slides").vegas({
+		transition: 'fade',
+		transitionDuration: 2500,
+		delay: 5000,
+    	slides: [
+       	{ src: "images/slides/03.jpg" },
+        	{ src: "images/slides/02.jpg" },
+        	{ src: "images/slides/01.jpg" }
+    	]
+	});
+
+
+	/* --------------------------------------------------- */
+	/*  Particle JS
+	------------------------------------------------------ */
+	$('.home-particles').particleground({
+	   dotColor: '#fff',
+	   lineColor: '#555555',
+	   particleRadius: 6,
+	   curveLines: true,
+	   density: 10000,
+	   proximity: 110
+	}); 
+
+
+	/*-----------------------------------------------------*/
+	/* tabs
+  	-------------------------------------------------------*/	
+	$(".tab-content").hide();
+	$(".tab-content").first().show();
+
+	$("ul.tabs li").click(function () {
+	   $("ul.tabs li").removeClass("active");
+	   $(this).addClass("active");
+	   $(".tab-content").hide();
+	   var activeTab = $(this).attr("data-id");
+	   $("#" + activeTab).fadeIn(700);
+	});
+
+
+	/*----------------------------------------------------*/
+  	/* Smooth Scrolling
+  	------------------------------------------------------*/
+  	$('.smoothscroll').on('click', function (e) {
+	 	
+	 	e.preventDefault();
+
+   	var target = this.hash,
+    	$target = $(target);
+
+    	$('html, body').stop().animate({
+       	'scrollTop': $target.offset().top
+      }, 800, 'swing', function () {
+      	window.location.hash = target;
       });
-    }
-  });
 
-  // Back to top button
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 100) {
-      $('.back-to-top').fadeIn('slow');
-    } else {
-      $('.back-to-top').fadeOut('slow');
-    }
-  });
-  $('.back-to-top').click(function(){
-    $('html, body').animate({scrollTop : 0},1500, 'easeInOutExpo');
-    return false;
-  });
+  	});
 
-  // Initiate the wowjs animation library
-  new WOW().init();
 
-  // Initiate superfish on nav menu
-  $('.nav-menu').superfish({
-    animation: {
-      opacity: 'show'
-    },
-    speed: 400
-  });
+  	/* --------------------------------------------------- */
+	/*  Placeholder Plugin Settings
+	------------------------------------------------------ */
+	$('input, textarea, select').placeholder()  
 
-  // Mobile Navigation
-  if ($('#nav-menu-container').length) {
-    var $mobile_nav = $('#nav-menu-container').clone().prop({
-      id: 'mobile-nav'
-    });
-    $mobile_nav.find('> ul').attr({
-      'class': '',
-      'id': ''
-    });
-    $('body').append($mobile_nav);
-    $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');
-    $('body').append('<div id="mobile-body-overly"></div>');
-    $('#mobile-nav').find('.menu-has-children').prepend('<i class="fa fa-chevron-down"></i>');
 
-    $(document).on('click', '.menu-has-children i', function(e) {
-      $(this).next().toggleClass('menu-item-active');
-      $(this).nextAll('ul').eq(0).slideToggle();
-      $(this).toggleClass("fa-chevron-up fa-chevron-down");
-    });
+  	/*---------------------------------------------------- */
+   /* ajaxchimp
+	------------------------------------------------------ */
 
-    $(document).on('click', '#mobile-nav-toggle', function(e) {
-      $('body').toggleClass('mobile-nav-active');
-      $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-      $('#mobile-body-overly').toggle();
-    });
+	// Example MailChimp url: http://xxx.xxx.list-manage.com/subscribe/post?u=xxx&id=xxx
+	var mailChimpURL = 'http://facebook.us8.list-manage.com/subscribe/post?u=cdb7b577e41181934ed6a6a44&amp;id=e65110b38d'
 
-    $(document).click(function(e) {
-      var container = $("#mobile-nav, #mobile-nav-toggle");
-      if (!container.is(e.target) && container.has(e.target).length === 0) {
-        if ($('body').hasClass('mobile-nav-active')) {
-          $('body').removeClass('mobile-nav-active');
-          $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-          $('#mobile-body-overly').fadeOut();
-        }
-      }
-    });
-  } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
-    $("#mobile-nav, #mobile-nav-toggle").hide();
-  }
+	$('#mc-form').ajaxChimp({
 
-  // Header scroll class
-  $(window).scroll(function() {
-    if ($(this).scrollTop() > 100) {
-      $('#header').addClass('header-scrolled');
-    } else {
-      $('#header').removeClass('header-scrolled');
-    }
-  });
+		language: 'es',
+	   url: mailChimpURL
 
-  if ($(window).scrollTop() > 100) {
-    $('#header').addClass('header-scrolled');
-  }
+	});
 
-  // Smooth scroll for the menu and links with .scrollto classes
-  $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function() {
-    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      if (target.length) {
-        var top_space = 0;
+	// Mailchimp translation
+	//
+	//  Defaults:
+	//	 'submit': 'Submitting...',
+	//  0: 'We have sent you a confirmation email',
+	//  1: 'Please enter a value',
+	//  2: 'An email address must contain a single @',
+	//  3: 'The domain portion of the email address is invalid (the portion after the @: )',
+	//  4: 'The username portion of the email address is invalid (the portion before the @: )',
+	//  5: 'This email address looks fake or invalid. Please enter a real email address'
 
-        if ($('#header').length) {
-          top_space = $('#header').outerHeight();
+	$.ajaxChimp.translations.es = {
+	  'submit': 'Submitting...',
+	  0: '<i class="fa fa-check"></i> We have sent you a confirmation email',
+	  1: '<i class="fa fa-warning"></i> You must enter a valid e-mail address.',
+	  2: '<i class="fa fa-warning"></i> E-mail address is not valid.',
+	  3: '<i class="fa fa-warning"></i> E-mail address is not valid.',
+	  4: '<i class="fa fa-warning"></i> E-mail address is not valid.',
+	  5: '<i class="fa fa-warning"></i> E-mail address is not valid.'
+	}
 
-          if (! $('#header').hasClass('header-scrolled')) {
-            top_space = top_space - 20;
-          }
-        }
 
-        $('html, body').animate({
-          scrollTop: target.offset().top - top_space
-        }, 1500, 'easeInOutExpo');
+	/*---------------------------------------------------- */
+	/*	contact form
+	------------------------------------------------------ */
 
-        if ($(this).parents('.nav-menu').length) {
-          $('.nav-menu .menu-active').removeClass('menu-active');
-          $(this).closest('li').addClass('menu-active');
-        }
+	/* local validation */
+	$('#contactForm').validate({
 
-        if ($('body').hasClass('mobile-nav-active')) {
-          $('body').removeClass('mobile-nav-active');
-          $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-          $('#mobile-body-overly').fadeOut();
-        }
-        return false;
-      }
-    }
-  });
+		/* submit via ajax */
+		submitHandler: function(form) {
 
-  // Navigation active state on scroll
-  var nav_sections = $('section');
-  var main_nav = $('.nav-menu, #mobile-nav');
-  var main_nav_height = $('#header').outerHeight();
+			var sLoader = $('#submit-loader');
 
-  $(window).on('scroll', function () {
-    var cur_pos = $(this).scrollTop();
-  
-    nav_sections.each(function() {
-      var top = $(this).offset().top - main_nav_height,
-          bottom = top + $(this).outerHeight();
-  
-      if (cur_pos >= top && cur_pos <= bottom) {
-        main_nav.find('li').removeClass('menu-active menu-item-active');
-        main_nav.find('a[href="#'+$(this).attr('id')+'"]').parent('li').addClass('menu-active menu-item-active');
-      }
-    });
-  });
+			$.ajax({      	
 
-  // Intro carousel
-  var introCarousel = $(".carousel");
-  var introCarouselIndicators = $(".carousel-indicators");
-  introCarousel.find(".carousel-inner").children(".carousel-item").each(function(index) {
-    (index === 0) ?
-    introCarouselIndicators.append("<li data-target='#introCarousel' data-slide-to='" + index + "' class='active'></li>") :
-    introCarouselIndicators.append("<li data-target='#introCarousel' data-slide-to='" + index + "'></li>");
+		      type: "POST",
+		      url: "inc/sendEmail.php",
+		      data: $(form).serialize(),
+		      beforeSend: function() { 
 
-    $(this).css("background-image", "url('" + $(this).children('.carousel-background').children('img').attr('src') +"')");
-    $(this).children('.carousel-background').remove();
-  });
+		      	sLoader.fadeIn(); 
 
-  $(".carousel").swipe({
-    swipe: function(event, direction, distance, duration, fingerCount, fingerData) {
-      if (direction == 'left') $(this).carousel('next');
-      if (direction == 'right') $(this).carousel('prev');
-    },
-    allowPageScroll:"vertical"
-  });
+		      },
+		      success: function(msg) {
 
-  // Skills section
-  $('#skills').waypoint(function() {
-    $('.progress .progress-bar').each(function() {
-      $(this).css("width", $(this).attr("aria-valuenow") + '%');
-    });
-  }, { offset: '80%'} );
+	            // Message was sent
+	            if (msg == 'OK') {
+	            	sLoader.fadeOut(); 
+	               $('#message-warning').hide();
+	               $('#contactForm').fadeOut();
+	               $('#message-success').fadeIn();   
+	            }
+	            // There was an error
+	            else {
+	            	sLoader.fadeOut(); 
+	               $('#message-warning').html(msg);
+		            $('#message-warning').fadeIn();
+	            }
 
-  // jQuery counterUp (used in Facts section)
-  $('[data-toggle="counter-up"]').counterUp({
-    delay: 10,
-    time: 1000
-  });
+		      },
+		      error: function() {
 
-  // Porfolio isotope and filter
-  var portfolioIsotope = $('.portfolio-container').isotope({
-    itemSelector: '.portfolio-item',
-    layoutMode: 'fitRows'
-  });
+		      	sLoader.fadeOut(); 
+		      	$('#message-warning').html("Something went wrong. Please try again.");
+		         $('#message-warning').fadeIn();
 
-  $('#portfolio-flters li').on( 'click', function() {
-    $("#portfolio-flters li").removeClass('filter-active');
-    $(this).addClass('filter-active');
+		      }
 
-    portfolioIsotope.isotope({ filter: $(this).data('filter') });
-  });
+	      });     		
+  		}
 
-  // Clients carousel (uses the Owl Carousel library)
-  $(".clients-carousel").owlCarousel({
-    autoplay: true,
-    dots: true,
-    loop: true,
-    responsive: { 0: { items: 2 }, 768: { items: 4 }, 900: { items: 6 }
-    }
-  });
+	});
 
-  // Testimonials carousel (uses the Owl Carousel library)
-  $(".testimonials-carousel").owlCarousel({
-    autoplay: true,
-    dots: true,
-    loop: true,
-    items: 1
-  });
+
+	/*----------------------------------------------------*/
+	/* Final Countdown Settings
+	------------------------------------------------------ */
+	var finalDate = '2018/01/01';
+
+	$('div#counter').countdown(finalDate)
+   	.on('update.countdown', function(event) {
+
+   		$(this).html(event.strftime('<div class=\"half\">' +
+   											 '<span>%D <sup>days</sup></span>' + 
+   										 	 '<span>%H <sup>hours</sup></span>' + 
+   										 	 '</div>' +
+   										 	 '<div class=\"half\">' +
+   										 	 '<span>%M <sup>mins</sup></span>' +
+   										 	 '<span>%S <sup>secs</sup></span>' +
+   										 	 '</div>'));
+
+   });     
+ 
 
 })(jQuery);
-
