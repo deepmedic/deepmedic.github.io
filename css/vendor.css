@@ -1178,7 +1178,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 /**
  *  02. owl carousel v2.2.0
  *  Copyright 2013-2016 David Deutsch
- *  Licensed under MIT (https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE)
+ *  Licensed under MIT (§)
  */
 
 
@@ -1623,7 +1623,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 .lity-close:active::after,
 .lity-close:visited::before,
 .lity-close:visited::after {
-  background-color: #39b54a;
+  background-color: #5c4ae2;
 }
 
 
