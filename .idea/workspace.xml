@@ -19,8 +19,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="16" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+            <state relative-caret-position="101">
+              <caret line="81" column="26" lean-forward="false" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#4;n#div#0;n#div#0;n#div#1;n#section#2;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -717,8 +717,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="16" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
+        <state relative-caret-position="101">
+          <caret line="81" column="26" lean-forward="false" selection-start-line="81" selection-start-column="26" selection-end-line="81" selection-end-column="26" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#1;n#div#4;n#div#0;n#div#0;n#div#1;n#section#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
