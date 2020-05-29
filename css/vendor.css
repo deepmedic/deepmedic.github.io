@@ -1197,6 +1197,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 
 .owl-carousel .owl-stage {
   position: relative;
+  display: flex;
   -ms-touch-action: pan-Y;
 }
 
@@ -1218,7 +1219,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 
 .owl-carousel .owl-item {
   position: relative;
-  min-height: 1px;
+  min-height: 47px;
   float: left;
   -webkit-backface-visibility: hidden;
   -webkit-tap-highlight-color: transparent;

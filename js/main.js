@@ -81,10 +81,12 @@
 	var ssOwlCarousel = function() {
 
 		$(".owl-carousel").owlCarousel({	
-	      loop: true,
-  			nav: false,
-			autoHeight: true,
-  			items: 1
+	      	loop: true,
+  			nav: true,
+			autoHeight: false,
+  			items: 1,
+			navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
+			dots: false
 		});
 
 	};  	

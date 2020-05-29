@@ -2299,6 +2299,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
   font-size: 3.2rem;
   line-height: 1.5;
   color: #303030;
+  margin-bottom: 220px
 }
 
 #testimonial-slider p::before,
@@ -2319,15 +2320,51 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
   content: '\201D';
 }
 
+#testimonial-slider .testimonial-no-quote p::before {
+  content: '';
+}
+
+#testimonial-slider .testimonial-no-quote p::after {
+  content: '';
+}
+
 #testimonial-slider .testimonial-author {
+  position: absolute;
+  bottom: 0;
+
+  width: 100%;
   margin-top: 4.2rem;
 }
 
-#testimonial-slider .testimonial-author img {
-  width: 20rem;
+#testimonial-slider .testimonial-author .img-div {
+  position: relative;
   height: 10rem;
+  width: 20rem;
   margin: 0 auto 1.2rem auto;
   display: block;
+}
+
+#testimonial-slider .testimonial-author .img-div img {
+  max-height: 10rem;
+  max-width: 20rem;
+  height: auto;
+  width: auto;
+  position: absolute;
+  bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+#testimonial-slider .testimonial-author img {
+  max-height: 10rem;
+  max-width: 20rem;
+  height: auto;
+  width: auto;
+  margin: 0 auto 1.2rem auto;
+
 }
 
 #testimonial-slider .testimonial-author .author-info {
@@ -2336,7 +2373,7 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
   text-align: center;
   font-family: "montserrat-semibold", sans-serif;
   font-size: 1.9rem;
-  margin-top: .9rem;
+  margin-top: 0rem;
   margin-bottom: 3rem;
   color: #151515;
 }
@@ -2363,14 +2400,14 @@ html[data-useragent*='MSIE 10.0'] .home-scrolldown,
 }
 
 #testimonial-slider .owl-nav [class*='owl-'] {
-  color: #FFFFFF;
+  color: rgba(0, 0, 0, 0.5);
   font-family: "montserrat-regular", sans-serif;
   font-size: 1.4rem;
   height: 3rem;
   line-height: 3rem;
   margin: .6rem;
   padding: 0 10px;
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
   display: inline-block;
   cursor: pointer;
   border-radius: 3px;
